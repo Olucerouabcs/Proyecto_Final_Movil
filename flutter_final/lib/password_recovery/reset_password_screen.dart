@@ -22,7 +22,7 @@ class ResetPasswordScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Image.asset(
-                    'assets/AutoExpress_logo.png', // Ajusta la ruta según tu estructura de carpetas
+                    'assets/AutoExpress_logo.png',
                     height: 100.0,
                   ),
                   ResetPasswordForm(),
