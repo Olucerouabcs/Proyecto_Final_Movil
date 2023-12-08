@@ -15,7 +15,6 @@ class Vehicle {
     required this.isAvailable,
   });
 
-  // Método toMap para convertir el objeto a un mapa
   Map<String, dynamic> toMap() {
     return {
       'id': id,
@@ -26,6 +25,4 @@ class Vehicle {
       'is_available': isAvailable,
     };
   }
-
-  // Puedes agregar más métodos, getters, setters según sea necesario
 }

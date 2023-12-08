@@ -9,7 +9,6 @@ class DB {
     return openDatabase(
       join(await getDatabasesPath(), 'autoexpress.db'),
       onCreate: (db, version) async {
-        // Crear la tabla para Clientes
         await db.execute('''
           CREATE TABLE Clients(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -21,7 +20,6 @@ class DB {
           )
         ''');
 
-        // Insertar datos de ejemplo para Clientes
         await db.rawInsert('''
           INSERT INTO Clients(name, lastname, phone, email, password)
           VALUES('John', 'Doe', 123456789, 'john.doe@example.com', 'Password123')
@@ -32,7 +30,6 @@ class DB {
           VALUES('Jane', 'Smith', 987654321, 'jane.smith@example.com', 'Pass456')
         ''');
 
-        // Crear la tabla para Vehículos
         await db.execute('''
           CREATE TABLE Vehicles(
             id INTEGER PRIMARY KEY,
@@ -69,7 +66,6 @@ class DB {
   VALUES('Crossover', 'Acura', 'Deportiva', 800, 1)
 ''');
 
-        // Crear la tabla para Rentas de Vehículos
         await db.execute('''
           CREATE TABLE VehicleRentals(
             id INTEGER PRIMARY KEY AUTOINCREMENT, 
@@ -88,7 +84,6 @@ class DB {
     );
   }
 
-  // Operaciones CRUD para Clientes
   static Future<int> insertClient(Client client) async {
     final db = await openDB();
     return await db.insert('Clients', client.toMap());
@@ -131,20 +126,17 @@ class DB {
     if (maps.isNotEmpty) {
       return Client(
         id: maps[0]['id'],
-        name: maps[0]['name'] ?? '', // Maneja el caso en que 'name' sea nulo
-        lastName: maps[0]['lastName'] ??
-            '', // Maneja el caso en que 'lastName' sea nulo
-        phone: maps[0]['phone'] ?? 0, // Maneja el caso en que 'phone' sea nulo
-        email: maps[0]['email'] ?? '', // Maneja el caso en que 'email' sea nulo
+        name: maps[0]['name'] ?? '',
+        lastName: maps[0]['lastName'] ?? '',
+        phone: maps[0]['phone'] ?? 0,
+        email: maps[0]['email'] ?? '',
         password: maps[0]['password'] ?? '',
       );
     } else {
-      // Si no se encuentra ningún cliente con el ID proporcionado, devolver null
       throw Exception('Cliente no encontrado');
     }
   }
 
-  // Operaciones CRUD para Vehículos
   static Future<int> insertVehicle(Vehicle vehicle) async {
     final db = await openDB();
     return await db.insert('Vehicles', vehicle.toMap());
@@ -165,7 +157,6 @@ class DB {
     });
   }
 
-  // Operaciones CRUD para Rentas de Vehículos
   static Future<int> insertVehicleRental(VehicleRental rental) async {
     final db = await openDB();
     return await db.insert('VehicleRentals', rental.toMap());

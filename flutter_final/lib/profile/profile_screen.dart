@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import '../home/home_screen.dart';
 import '../rentals/rentals_screen.dart';
-import '../login/login_screen.dart'; // Importa la pantalla de inicio de sesión
-import '../database/clients.dart'; // Importa el modelo Client
-import '../database/db.dart'; // Importa tu clase DB
+import '../login/login_screen.dart';
+import '../database/clients.dart';
+import '../database/db.dart';
 
 class ProfileScreen extends StatefulWidget {
   final int userId;
@@ -77,7 +77,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         SizedBox(height: 20),
                         ElevatedButton(
                           onPressed: () {
-                            // Agregar aquí la lógica para cerrar sesión
                             showDialog(
                               context: context,
                               builder: (BuildContext context) {
@@ -95,8 +94,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     ),
                                     TextButton(
                                       onPressed: () {
-                                        Navigator.of(context)
-                                            .pop(); // Cerrar el cuadro de diálogo
+                                        Navigator.of(context).pop();
                                         Navigator.popUntil(
                                           context,
                                           ModalRoute.withName('/'),
@@ -116,7 +114,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             );
                           },
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.red, // Color rojo
+                            primary: Colors.red,
                           ),
                           child: Text('Cerrar sesión'),
                         ),

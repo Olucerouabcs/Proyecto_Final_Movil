@@ -4,10 +4,8 @@ import '../profile/profile_screen.dart';
 import 'rental_process_screen.dart';
 
 class HomeScreen extends StatelessWidget {
-  final int userId;
+  late final int userId;
 
-  HomeScreen({required this.userId});
-  // Lista de vehículos
   final List<Vehicle> vehicles = [
     Vehicle('MDX', 'Acura'),
     Vehicle('DB11', 'Acura'),
@@ -23,15 +21,17 @@ class HomeScreen extends StatelessWidget {
     Vehicle('ILX', 'Acura'),
     Vehicle('ILX', 'Acura'),
     Vehicle('ILX', 'Acura'),
-
-    // ... Agrega más vehículos según sea necesario
   ];
+
+  HomeScreen({
+    required this.userId,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('AutoExpress $userId!'),
+        title: Text('AutoExpress'),
       ),
       body: Container(
         color: Color(0xFF69B5F4),
@@ -51,7 +51,6 @@ class HomeScreen extends StatelessWidget {
                     'assets/AutoExpress_logo.png',
                     height: 100.0,
                   ),
-                  // Lista de vehículos seleccionables
                   Expanded(
                     child: ListView.builder(
                       itemCount: vehicles.length,
@@ -71,15 +70,15 @@ class HomeScreen extends StatelessWidget {
                               ),
                             ),
                             onTap: () {
-                              // Navegar a la pantalla de proceso de renta
                               Navigator.popUntil(
                                   context, ModalRoute.withName('/'));
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => RentalProcessScreen(
-                                      selectedVehicle: vehicles[index],
-                                      userId: userId),
+                                    selectedVehicle: vehicles[index],
+                                    userId: userId,
+                                  ),
                                 ),
                               );
                             },
@@ -109,14 +108,11 @@ class HomeScreen extends StatelessWidget {
             label: 'Perfil',
           ),
         ],
-        // Aquí puedes manejar la navegación entre las secciones
         onTap: (index) {
           switch (index) {
             case 0:
-              // Navegar a la sección de "Autos"
               break;
             case 1:
-              // Navegar a la pantalla de "Rentas"
               Navigator.popUntil(context, ModalRoute.withName('/'));
               Navigator.push(
                 context,
@@ -125,7 +121,6 @@ class HomeScreen extends StatelessWidget {
               );
               break;
             case 2:
-              // Navegar a la sección de "Perfil"
               Navigator.popUntil(context, ModalRoute.withName('/'));
               Navigator.push(
                 context,
@@ -140,7 +135,6 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-// Modelo de vehículo
 class Vehicle {
   final String model;
   final String brand;

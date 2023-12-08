@@ -121,9 +121,7 @@ class RentalsScreen extends StatelessWidget {
               );
               break;
             case 2:
-              // Navegar a la sección de "Perfil"
-              Navigator.popUntil(context,
-                  ModalRoute.withName('/')); // Regresa a la pantalla principal
+              Navigator.popUntil(context, ModalRoute.withName('/'));
               Navigator.push(
                 context,
                 MaterialPageRoute(

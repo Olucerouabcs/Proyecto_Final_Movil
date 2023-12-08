@@ -229,7 +229,6 @@ class _RegisterFormState extends State<RegisterForm> {
               SizedBox(width: 4),
               TextButton(
                 onPressed: () {
-                  // Navegar a la pantalla de inicio de sesión
                   Navigator.pop(context);
                 },
                 child: Text('Inicia sesión'),

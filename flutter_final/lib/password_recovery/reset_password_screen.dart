@@ -46,9 +46,7 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
   final TextEditingController _confirmPasswordController =
       TextEditingController();
 
-  void _resetPassword() {
-    // Lógica para restablecer la contraseña
-  }
+  void _resetPassword() {}
 
   @override
   Widget build(BuildContext context) {
@@ -75,9 +73,7 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
               ),
             ),
             obscureText: true,
-            validator: (value) {
-              // Validaciones de la nueva contraseña
-            },
+            validator: (value) {},
           ),
           SizedBox(height: 16),
           TextFormField(
@@ -91,9 +87,7 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
               ),
             ),
             obscureText: true,
-            validator: (value) {
-              // Validaciones de la confirmación de la contraseña
-            },
+            validator: (value) {},
           ),
           SizedBox(height: 16),
           ElevatedButton(
@@ -116,7 +110,6 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
               SizedBox(width: 4),
               TextButton(
                 onPressed: () {
-                  // Navegar a la pantalla de inicio de sesión
                   Navigator.pop(context);
                 },
                 child: Text('Inicia sesión'),

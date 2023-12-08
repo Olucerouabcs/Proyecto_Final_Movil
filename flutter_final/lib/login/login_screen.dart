@@ -55,11 +55,9 @@ class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
   void _login() async {
     if (_formKey.currentState?.validate() ?? false) {
-      // Obtén una referencia a la base de datos
       Database db = await DB.openDB();
       print("Ruta de la base de datos: ${await getDatabasesPath()}");
 
-      // Consulta para verificar si el usuario existe y obtener su ID
       List<Map<String, dynamic>> result = await db.rawQuery(
         'SELECT id FROM Clients WHERE email = ? AND password = ?',
         [_emailController.text, _passwordController.text],
@@ -68,7 +66,6 @@ class _LoginFormState extends State<LoginForm> {
       print(_passwordController.text);
 
       if (result.isNotEmpty) {
-        // Usuario encontrado, realiza el inicio de sesión
         int userId = result[0]['id'];
         Navigator.pushReplacement(
           context,
@@ -77,7 +74,6 @@ class _LoginFormState extends State<LoginForm> {
           ),
         );
       } else {
-        // Usuario no encontrado, muestra un mensaje de error
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Correo electrónico o contraseña incorrectos.'),
@@ -88,40 +84,6 @@ class _LoginFormState extends State<LoginForm> {
     }
   }
 
-  /*void _login() {
-    if (_formKey.currentState?.validate() ?? false) {
-      // Lógica de inicio de sesión
-    }
-  }
-
-  Future<void> _login() async {
-    if (_formKey.currentState?.validate() ?? false) {
-      // Obtén una referencia a la base de datos
-      Database db = await DBHelper().database;
-
-      // Consulta para verificar si el usuario existe
-      List<Map<String, dynamic>> result = await db.rawQuery(
-          'SELECT * FROM users WHERE email = ? AND password = ?',
-          [_emailController.text, _passwordController.text]);
-
-      if (result.isNotEmpty) {
-        // Usuario encontrado, realiza el inicio de sesión
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => HomeScreen()),
-        );
-      } else {
-        // Usuario no encontrado, muestra un mensaje de error
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Correo electrónico o contraseña incorrectos.'),
-            duration: Duration(seconds: 2),
-          ),
-        );
-      }
-    }
-  }
-*/
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -190,7 +152,6 @@ class _LoginFormState extends State<LoginForm> {
                   MaterialPageRoute(
                       builder: (context) => ForgotPasswordScreen()),
                 );
-                // Navegar a la pantalla de recuperación de contraseña
               },
               child: Text('¿Olvidó su contraseña?'),
             ),
@@ -218,7 +179,6 @@ class _LoginFormState extends State<LoginForm> {
                     context,
                     MaterialPageRoute(builder: (context) => RegisterScreen()),
                   );
-                  // Navegar a la pantalla de registro
                 },
                 child: Text('Crear cuenta'),
               ),

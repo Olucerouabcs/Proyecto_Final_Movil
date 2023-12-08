@@ -51,9 +51,7 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
   final _formKey = GlobalKey<FormState>();
 
   void _sendResetLink() {
-    if (_formKey.currentState?.validate() ?? false) {
-      // Lógica para enviar el enlace de restablecimiento
-    }
+    if (_formKey.currentState?.validate() ?? false) {}
   }
 
   @override
@@ -94,7 +92,6 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
           SizedBox(height: 16),
           ElevatedButton(
             onPressed: () {
-              // Navegar a la pantalla de reset_password_screen.dart
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => ResetPasswordScreen()),
@@ -120,7 +117,6 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
                     context,
                     MaterialPageRoute(builder: (context) => LoginScreen()),
                   );
-                  // Navegar a la pantalla de inicio de sesión
                 },
                 child: Text('Inicia sesión'),
               ),

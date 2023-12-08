@@ -12,8 +12,10 @@ class RentalProcessScreen extends StatefulWidget {
   final int userId;
   final Vehicle selectedVehicle;
 
-  RentalProcessScreen({required this.userId, required this.selectedVehicle});
-
+  RentalProcessScreen({
+    required this.userId,
+    required this.selectedVehicle,
+  });
   @override
   _RentalProcessScreenState createState() => _RentalProcessScreenState();
 }
@@ -26,12 +28,10 @@ class _RentalProcessScreenState extends State<RentalProcessScreen> {
   String selectedPaymentMethod = 'Efectivo';
 
   _RentalProcessScreenState() {
-    // Inicializa startDate en el constructor
     startDate = DateTime.now();
     endDate = startDate.add(Duration(days: selectedDays));
   }
   Future<void> saveRental() async {
-    // Obtener el cliente actual
     Client client;
     try {
       client = await DB.getClientById(widget.userId);
@@ -40,13 +40,10 @@ class _RentalProcessScreenState extends State<RentalProcessScreen> {
       return;
     }
 
-    // Obtener el vehículo seleccionado
     Vehicle selectedVehicle = widget.selectedVehicle;
 
-    // Calcular el total de la renta
     double total = calculateTotal(startDate, endDate, ratePerDay);
 
-    // Crear una nueva instancia de VehicleRental
     VehicleRental rental = VehicleRental(
       idClient: widget.userId,
       idVehicle: 1,
@@ -56,7 +53,6 @@ class _RentalProcessScreenState extends State<RentalProcessScreen> {
       paymentMethod: selectedPaymentMethod,
     );
 
-    // Guardar la renta en la base de datos
     try {
       await DB.insertVehicleRental(rental);
       print('Renta guardada con éxito');
@@ -196,8 +192,6 @@ class _RentalProcessScreenState extends State<RentalProcessScreen> {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          // Guardar la renta (puedes implementar lógica de guardado aquí)
-                          // Luego puedes navegar a la pantalla de rentas o realizar otras acciones necesarias
                           Navigator.popUntil(context, ModalRoute.withName('/'));
                           Navigator.push(
                             context,
@@ -234,10 +228,8 @@ class _RentalProcessScreenState extends State<RentalProcessScreen> {
         onTap: (index) {
           switch (index) {
             case 0:
-              // Navegar a la sección de "Autos"
               break;
             case 1:
-              // Navegar a la pantalla de "Rentas"
               Navigator.popUntil(context, ModalRoute.withName('/'));
               Navigator.push(
                 context,
@@ -246,7 +238,6 @@ class _RentalProcessScreenState extends State<RentalProcessScreen> {
               );
               break;
             case 2:
-              // Navegar a la sección de "Perfil"
               Navigator.popUntil(context, ModalRoute.withName('/'));
               Navigator.push(
                 context,
@@ -261,7 +252,6 @@ class _RentalProcessScreenState extends State<RentalProcessScreen> {
   }
 
   int calculateDays(DateTime startDate, DateTime endDate) {
-    // Asegurarse de que la fecha de inicio sea anterior a la fecha de fin
     if (endDate.isBefore(startDate)) {
       return 0;
     }

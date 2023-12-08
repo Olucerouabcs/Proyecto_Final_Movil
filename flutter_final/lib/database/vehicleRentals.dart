@@ -17,7 +17,6 @@ class VehicleRental {
     required this.paymentMethod,
   });
 
-  // Método toMap para convertir el objeto a un mapa
   Map<String, dynamic> toMap() {
     return {
       'id': id,
@@ -29,6 +28,4 @@ class VehicleRental {
       'paymentMethod': paymentMethod,
     };
   }
-
-  // Puedes agregar más métodos, getters, setters según sea necesario
 }

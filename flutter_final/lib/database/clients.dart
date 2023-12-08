@@ -1,5 +1,7 @@
 import 'dart:ffi';
 
+import 'package:flutter/material.dart';
+
 class Client {
   int? id;
   String name;
@@ -28,12 +30,11 @@ class Client {
     };
   }
 
-  // Método para imprimir información del cliente
   void printClientInfo() {
     print('Client ID: $id');
-    print('Name: $name $lastName');
+    print('Name: $name');
+    print('lastname:$lastName');
     print('Phone: $phone');
     print('Email: $email');
-    // No imprimimos la contraseña por razones de seguridad
   }
 }
