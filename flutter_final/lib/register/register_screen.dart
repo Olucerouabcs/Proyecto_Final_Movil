@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class RegisterScreen extends StatelessWidget {
   @override
@@ -52,9 +53,34 @@ class _RegisterFormState extends State<RegisterForm> {
 
   final _formKey = GlobalKey<FormState>();
 
-  void _register() {
+  void _register() async {
     if (_formKey.currentState?.validate() ?? false) {
-      // Lógica de registro
+      final String url =
+          'http://10.0.2.2:80/database/register.php'; // Reemplaza con la URL de tu servidor y tu script PHP
+
+      try {
+        final response = await http.post(
+          Uri.parse(url),
+          body: {
+            'name': _nameController.text,
+            'lastName': _lastNameController.text,
+            'phone': _phoneController.text,
+            'email': _emailController.text,
+            'password': _passwordController.text,
+          },
+        );
+
+        if (response.statusCode == 200) {
+          // Manejar la respuesta exitosa, por ejemplo, mostrar un mensaje al usuario
+          print('Registro exitoso');
+        } else {
+          // Manejar errores de servidor
+          print('Error en el servidor: ${response.reasonPhrase}');
+        }
+      } catch (error) {
+        // Manejar errores de red u otros
+        print('Error: $error');
+      }
     }
   }
 

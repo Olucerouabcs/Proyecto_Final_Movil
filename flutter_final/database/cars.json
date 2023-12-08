@@ -1,0 +1,18 @@
+[
+{"type":"header","version":"5.2.0","comment":"Export to JSON plugin for PHPMyAdmin"},
+{"type":"database","name":"laravel"},
+{"type":"table","name":"cars","database":"laravel","data":
+[
+{"id":"1","v_models_id":"1","trademarks_id":"1","categories_id":"1","is_avaliable":"0","rates_id":"4","image":"","created_at":"2023-12-04 16:03:27","updated_at":"2023-12-04 16:03:27"},
+{"id":"2","v_models_id":"2","trademarks_id":"1","categories_id":"2","is_avaliable":"0","rates_id":"7","image":"","created_at":"2023-12-04 16:03:27","updated_at":"2023-12-04 16:03:27"},
+{"id":"3","v_models_id":"3","trademarks_id":"1","categories_id":"3","is_avaliable":"1","rates_id":"11","image":"","created_at":"2023-12-04 16:03:27","updated_at":"2023-12-04 16:03:27"},
+{"id":"4","v_models_id":"1","trademarks_id":"1","categories_id":"4","is_avaliable":"1","rates_id":"15","image":"","created_at":"2023-12-04 16:03:27","updated_at":"2023-12-04 16:03:27"},
+{"id":"5","v_models_id":"2","trademarks_id":"1","categories_id":"5","is_avaliable":"1","rates_id":"20","image":"","created_at":"2023-12-04 16:03:27","updated_at":"2023-12-04 16:03:27"},
+{"id":"6","v_models_id":"4","trademarks_id":"2","categories_id":"1","is_avaliable":"1","rates_id":"4","image":"","created_at":"2023-12-04 16:03:27","updated_at":"2023-12-04 16:03:27"},
+{"id":"7","v_models_id":"5","trademarks_id":"2","categories_id":"2","is_avaliable":"1","rates_id":"7","image":"","created_at":"2023-12-04 16:03:27","updated_at":"2023-12-04 16:03:27"},
+{"id":"8","v_models_id":"6","trademarks_id":"2","categories_id":"3","is_avaliable":"1","rates_id":"11","image":"","created_at":"2023-12-04 16:03:27","updated_at":"2023-12-04 16:03:27"},
+{"id":"9","v_models_id":"4","trademarks_id":"2","categories_id":"4","is_avaliable":"1","rates_id":"15","image":"","created_at":"2023-12-04 16:03:27","updated_at":"2023-12-04 16:03:27"},
+{"id":"10","v_models_id":"5","trademarks_id":"2","categories_id":"5","is_avaliable":"1","rates_id":"20","image":"","created_at":"2023-12-04 16:03:27","updated_at":"2023-12-04 16:03:27"}
+]
+}
+]

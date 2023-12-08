@@ -1,0 +1,19 @@
+[
+{"type":"header","version":"5.2.0","comment":"Export to JSON plugin for PHPMyAdmin"},
+{"type":"database","name":"laravel"},
+{"type":"table","name":"addresses","database":"laravel","data":
+[
+{"id":"1","address":"Avenida Central","code_postal":"20040","residence_number":"7E","created_at":"2023-12-04 16:03:26","updated_at":"2023-12-04 16:03:26"},
+{"id":"2","address":"Calle 15","code_postal":"18050","residence_number":"2F","created_at":"2023-12-04 16:03:26","updated_at":"2023-12-04 16:03:26"},
+{"id":"3","address":"Boulevard 8","code_postal":"25030","residence_number":"9G","created_at":"2023-12-04 16:03:26","updated_at":"2023-12-04 16:03:26"},
+{"id":"4","address":"Ronda 6","code_postal":"19020","residence_number":"4H","created_at":"2023-12-04 16:03:26","updated_at":"2023-12-04 16:03:26"},
+{"id":"5","address":"Pasaje 11","code_postal":"22015","residence_number":"6I","created_at":"2023-12-04 16:03:26","updated_at":"2023-12-04 16:03:26"},
+{"id":"6","address":"Avenida Principal","code_postal":"28050","residence_number":"12B","created_at":"2023-12-04 16:03:26","updated_at":"2023-12-04 16:03:26"},
+{"id":"7","address":"Calle 10","code_postal":"15060","residence_number":"5A","created_at":"2023-12-04 16:03:26","updated_at":"2023-12-04 16:03:26"},
+{"id":"8","address":"Avenida 3","code_postal":"31040","residence_number":"8C","created_at":"2023-12-04 16:03:26","updated_at":"2023-12-04 16:03:26"},
+{"id":"9","address":"Callejón 7","code_postal":"18025","residence_number":"3B","created_at":"2023-12-04 16:03:26","updated_at":"2023-12-04 16:03:26"},
+{"id":"10","address":"Paseo 12","code_postal":"26015","residence_number":"10D","created_at":"2023-12-04 16:03:26","updated_at":"2023-12-04 16:03:26"},
+{"id":"11","address":"Calle 7","code_postal":"24234","residence_number":"10","created_at":"2023-12-06 22:36:23","updated_at":"2023-12-06 22:36:35"}
+]
+}
+]

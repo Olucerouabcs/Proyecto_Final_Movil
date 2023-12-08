@@ -1,0 +1,19 @@
+[
+{"type":"header","version":"5.2.0","comment":"Export to JSON plugin for PHPMyAdmin"},
+{"type":"database","name":"laravel"},
+{"type":"table","name":"clients","database":"laravel","data":
+[
+{"id":"1","name":"Juan","lastname":"Perez","email":"jupe@gmail.com","phone":"6601234567","id_address":"1","created_at":"2023-12-04 16:03:26","updated_at":"2023-12-04 16:03:26"},
+{"id":"2","name":"Pedro","lastname":"Lopez","email":"pelo@gmail.com","phone":"9865197516","id_address":"2","created_at":"2023-12-04 16:03:26","updated_at":"2023-12-04 16:03:26"},
+{"id":"3","name":"Maria","lastname":"Gonzalez","email":"mago@gmail.com","phone":"1234567890","id_address":"3","created_at":"2023-12-04 16:03:26","updated_at":"2023-12-04 16:03:26"},
+{"id":"4","name":"Jose","lastname":"Rodriguez","email":"joro@hotmail.com","phone":"446548975","id_address":"4","created_at":"2023-12-04 16:03:26","updated_at":"2023-12-04 16:03:26"},
+{"id":"5","name":"Ana","lastname":"Martinez","email":"anma@outlock.com","phone":"6122009874","id_address":"5","created_at":"2023-12-04 16:03:26","updated_at":"2023-12-04 16:03:26"},
+{"id":"6","name":"Juan","lastname":"Gomez","email":"juan.gomez@uabcs.mx","phone":"6123456789","id_address":"6","created_at":"2023-12-04 16:03:26","updated_at":"2023-12-04 16:03:26"},
+{"id":"7","name":"Carlos","lastname":"López","email":"carlos.lopez@hotmail.com","phone":"6125551234","id_address":"7","created_at":"2023-12-04 16:03:26","updated_at":"2023-12-04 16:03:26"},
+{"id":"8","name":"Elena","lastname":"Ramirez","email":"elena.ramirez@gmail.com","phone":"6128765432","id_address":"8","created_at":"2023-12-04 16:03:26","updated_at":"2023-12-04 16:03:26"},
+{"id":"9","name":"Jorge","lastname":"Perez","email":"jorge.perez@outlock.com","phone":"6129876543","id_address":"9","created_at":"2023-12-04 16:03:26","updated_at":"2023-12-04 16:03:26"},
+{"id":"10","name":"Laura","lastname":"Rodriguez","email":"laura.rodriguez@uabcs.mx","phone":"6123334444","id_address":"10","created_at":"2023-12-04 16:03:26","updated_at":"2023-12-04 16:03:26"},
+{"id":"11","name":"Bianca","lastname":"Sandez","email":"bsandez@gmail.com","phone":"6121256892","id_address":"11","created_at":"2023-12-06 22:36:23","updated_at":"2023-12-06 22:36:23"}
+]
+}
+]

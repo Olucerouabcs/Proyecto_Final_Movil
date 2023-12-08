@@ -1,0 +1,18 @@
+[
+{"type":"header","version":"5.2.0","comment":"Export to JSON plugin for PHPMyAdmin"},
+{"type":"database","name":"laravel"},
+{"type":"table","name":"users","database":"laravel","data":
+[
+{"id":"1","name":"Admin","lastname":"Admin","phone":"123456789","email":"Admin@gmail.com","password":"123456789A","email_verified_at":null,"created_at":"2023-12-04 16:03:26","updated_at":"2023-12-04 16:03:26"},
+{"id":"2","name":"Jose Ramon","lastname":"Villavicencio Alvarez","phone":"987654321","email":"joseramonv_20@alu.uabcs.mx","password":"123456789","email_verified_at":null,"created_at":"2023-12-04 16:03:26","updated_at":"2023-12-04 16:03:26"},
+{"id":"3","name":"Chelsea Sporer","lastname":"Pacocha","phone":"+1.904.410.0844","email":"khaley@example.org","password":"$2y$12$7JHfhH.ADaZbWfHv7Rcu0ebNDnrPiYCaCcOQuau41WOVJ8ICCEJ1q","email_verified_at":"2023-12-04 16:03:26","created_at":"2023-12-04 16:03:26","updated_at":"2023-12-04 16:03:26"},
+{"id":"4","name":"Etha Kohler","lastname":"Cruickshank","phone":"+1-458-793-0744","email":"ivory80@example.com","password":"$2y$12$7JHfhH.ADaZbWfHv7Rcu0ebNDnrPiYCaCcOQuau41WOVJ8ICCEJ1q","email_verified_at":"2023-12-04 16:03:26","created_at":"2023-12-04 16:03:26","updated_at":"2023-12-04 16:03:26"},
+{"id":"5","name":"August Terry","lastname":"Murphy","phone":"+14439188649","email":"pascale36@example.com","password":"$2y$12$7JHfhH.ADaZbWfHv7Rcu0ebNDnrPiYCaCcOQuau41WOVJ8ICCEJ1q","email_verified_at":"2023-12-04 16:03:26","created_at":"2023-12-04 16:03:26","updated_at":"2023-12-04 16:03:26"},
+{"id":"6","name":"Maye Gerlach","lastname":"Nitzsche","phone":"+13864261605","email":"hpurdy@example.org","password":"$2y$12$7JHfhH.ADaZbWfHv7Rcu0ebNDnrPiYCaCcOQuau41WOVJ8ICCEJ1q","email_verified_at":"2023-12-04 16:03:26","created_at":"2023-12-04 16:03:26","updated_at":"2023-12-04 16:03:26"},
+{"id":"7","name":"Aurelio Waelchi","lastname":"Pfannerstill","phone":"773-900-5576","email":"khalil72@example.org","password":"$2y$12$7JHfhH.ADaZbWfHv7Rcu0ebNDnrPiYCaCcOQuau41WOVJ8ICCEJ1q","email_verified_at":"2023-12-04 16:03:26","created_at":"2023-12-04 16:03:26","updated_at":"2023-12-04 16:03:26"},
+{"id":"8","name":"Shad Dach","lastname":"Crooks","phone":"234.309.3087","email":"nick22@example.com","password":"$2y$12$7JHfhH.ADaZbWfHv7Rcu0ebNDnrPiYCaCcOQuau41WOVJ8ICCEJ1q","email_verified_at":"2023-12-04 16:03:26","created_at":"2023-12-04 16:03:26","updated_at":"2023-12-04 16:03:26"},
+{"id":"9","name":"Sedrick Rempel","lastname":"Gerlach","phone":"+1 (360) 614-1608","email":"xfritsch@example.com","password":"$2y$12$7JHfhH.ADaZbWfHv7Rcu0ebNDnrPiYCaCcOQuau41WOVJ8ICCEJ1q","email_verified_at":"2023-12-04 16:03:26","created_at":"2023-12-04 16:03:26","updated_at":"2023-12-04 16:03:26"},
+{"id":"10","name":"Addie Sauer I","lastname":"Stokes","phone":"+1 (256) 734-3222","email":"betsy.quigley@example.com","password":"$2y$12$7JHfhH.ADaZbWfHv7Rcu0ebNDnrPiYCaCcOQuau41WOVJ8ICCEJ1q","email_verified_at":"2023-12-04 16:03:26","created_at":"2023-12-04 16:03:26","updated_at":"2023-12-04 16:03:26"}
+]
+}
+]

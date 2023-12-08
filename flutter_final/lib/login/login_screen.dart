@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:sqflite/sqflite.dart';
 import '../register/register_screen.dart';
 import '../password_recovery/forgot_password_screen.dart';
+import '../home/home_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -57,6 +59,34 @@ class _LoginFormState extends State<LoginForm> {
     }
   }
 
+  /*Future<void> _login() async {
+    if (_formKey.currentState?.validate() ?? false) {
+      // Obtén una referencia a la base de datos
+      Database db = await DBHelper().database;
+
+      // Consulta para verificar si el usuario existe
+      List<Map<String, dynamic>> result = await db.rawQuery(
+          'SELECT * FROM users WHERE email = ? AND password = ?',
+          [_emailController.text, _passwordController.text]);
+
+      if (result.isNotEmpty) {
+        // Usuario encontrado, realiza el inicio de sesión
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => HomeScreen()),
+        );
+      } else {
+        // Usuario no encontrado, muestra un mensaje de error
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Correo electrónico o contraseña incorrectos.'),
+            duration: Duration(seconds: 2),
+          ),
+        );
+      }
+    }
+  }
+*/
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -132,7 +162,12 @@ class _LoginFormState extends State<LoginForm> {
           ),
           SizedBox(height: 16),
           ElevatedButton(
-            onPressed: _login,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HomeScreen()),
+              );
+            },
             child: Text('Ingresar'),
             style: ElevatedButton.styleFrom(
               primary: Color(0xFF5063BF),
