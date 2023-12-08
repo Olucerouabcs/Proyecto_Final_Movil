@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import '../database/db.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:flutter_final/database/clients.dart';
 
 class RegisterScreen extends StatelessWidget {
   @override
@@ -55,31 +57,37 @@ class _RegisterFormState extends State<RegisterForm> {
 
   void _register() async {
     if (_formKey.currentState?.validate() ?? false) {
-      final String url =
-          'http://10.0.2.2:80/database/register.php'; // Reemplaza con la URL de tu servidor y tu script PHP
+      // Obtén una referencia a la base de datos
+      Database db = await DB.openDB();
 
-      try {
-        final response = await http.post(
-          Uri.parse(url),
-          body: {
-            'name': _nameController.text,
-            'lastName': _lastNameController.text,
-            'phone': _phoneController.text,
-            'email': _emailController.text,
-            'password': _passwordController.text,
-          },
+      // Crea un objeto Client con los datos del formulario
+      Client newClient = Client(
+        name: _nameController.text,
+        lastName: _lastNameController.text,
+        phone: int.parse(_phoneController.text),
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+
+      // Inserta el nuevo cliente en la base de datos
+      int clientId = await DB.insertClient(newClient);
+
+      if (clientId != -1) {
+        // Registro exitoso, podrías realizar acciones adicionales si es necesario
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Registro exitoso. ID del usuario: $clientId'),
+            duration: Duration(seconds: 2),
+          ),
         );
-
-        if (response.statusCode == 200) {
-          // Manejar la respuesta exitosa, por ejemplo, mostrar un mensaje al usuario
-          print('Registro exitoso');
-        } else {
-          // Manejar errores de servidor
-          print('Error en el servidor: ${response.reasonPhrase}');
-        }
-      } catch (error) {
-        // Manejar errores de red u otros
-        print('Error: $error');
+      } else {
+        // Error en el registro
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error en el registro. Inténtelo nuevamente.'),
+            duration: Duration(seconds: 2),
+          ),
+        );
       }
     }
   }

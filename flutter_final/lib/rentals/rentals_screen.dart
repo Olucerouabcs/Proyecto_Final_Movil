@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
-import '../home/home_screen.dart';
 import '../profile/profile_screen.dart';
+import '../home/home_screen.dart';
+import '../database/db.dart';
+import '../database/vehicleRentals.dart';
 
 class RentalsScreen extends StatelessWidget {
+  final int userId;
+
+  RentalsScreen({required this.userId});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +33,49 @@ class RentalsScreen extends StatelessWidget {
                     'assets/AutoExpress_logo.png',
                     height: 100.0,
                   ),
-                  // Resto de las secciones
+                  SizedBox(height: 20.0),
+                  Text(
+                    'Lista de Rentas',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 20.0),
+                  FutureBuilder(
+                    future: DB.getVehicleRentals(userId),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return CircularProgressIndicator();
+                      } else if (snapshot.hasError) {
+                        return Text('Error: ${snapshot.error}');
+                      } else if (!snapshot.hasData ||
+                          (snapshot.data as List).isEmpty) {
+                        return Text('No hay rentas disponibles.');
+                      } else {
+                        List<VehicleRental> rentals =
+                            snapshot.data as List<VehicleRental>;
+
+                        return Expanded(
+                          child: ListView.builder(
+                            itemCount: rentals.length,
+                            itemBuilder: (context, index) {
+                              VehicleRental rental = rentals[index];
+
+                              return ListTile(
+                                title: Text(
+                                    'Vehículo: ${rental.idVehicle}, Total: \$${rental.total}'),
+                                subtitle: Text(
+                                    'Cliente: ${rental.idClient}, Fecha Inicio: ${rental.initialDay}, Fecha Entrega: ${rental.deliveryDay}'),
+                                // Agrega más información si es necesario
+                                // ...
+                              );
+                            },
+                          ),
+                        );
+                      }
+                    },
+                  ),
                 ],
               ),
             ),
@@ -50,7 +98,6 @@ class RentalsScreen extends StatelessWidget {
             label: 'Perfil',
           ),
         ],
-        // Aquí puedes manejar la navegación entre las secciones
         onTap: (index) {
           switch (index) {
             case 0:
@@ -59,7 +106,8 @@ class RentalsScreen extends StatelessWidget {
                   ModalRoute.withName('/')); // Regresa a la pantalla principal
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => HomeScreen()),
+                MaterialPageRoute(
+                    builder: (context) => HomeScreen(userId: userId)),
               );
               break;
             case 1:
@@ -68,7 +116,8 @@ class RentalsScreen extends StatelessWidget {
                   ModalRoute.withName('/')); // Regresa a la pantalla principal
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => RentalsScreen()),
+                MaterialPageRoute(
+                    builder: (context) => RentalsScreen(userId: userId)),
               );
               break;
             case 2:
@@ -77,7 +126,8 @@ class RentalsScreen extends StatelessWidget {
                   ModalRoute.withName('/')); // Regresa a la pantalla principal
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ProfileScreen()),
+                MaterialPageRoute(
+                    builder: (context) => ProfileScreen(userId: userId)),
               );
               break;
           }

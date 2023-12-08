@@ -4,6 +4,9 @@ import '../profile/profile_screen.dart';
 import 'rental_process_screen.dart';
 
 class HomeScreen extends StatelessWidget {
+  final int userId;
+
+  HomeScreen({required this.userId});
   // Lista de vehículos
   final List<Vehicle> vehicles = [
     Vehicle('MDX', 'Acura'),
@@ -28,7 +31,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('AutoExpress'),
+        title: Text('AutoExpress $userId!'),
       ),
       body: Container(
         color: Color(0xFF69B5F4),
@@ -75,8 +78,8 @@ class HomeScreen extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => RentalProcessScreen(
-                                    selectedVehicle: vehicles[index],
-                                  ),
+                                      selectedVehicle: vehicles[index],
+                                      userId: userId),
                                 ),
                               );
                             },
@@ -117,7 +120,8 @@ class HomeScreen extends StatelessWidget {
               Navigator.popUntil(context, ModalRoute.withName('/'));
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => RentalsScreen()),
+                MaterialPageRoute(
+                    builder: (context) => RentalsScreen(userId: userId)),
               );
               break;
             case 2:
@@ -125,7 +129,8 @@ class HomeScreen extends StatelessWidget {
               Navigator.popUntil(context, ModalRoute.withName('/'));
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ProfileScreen()),
+                MaterialPageRoute(
+                    builder: (context) => ProfileScreen(userId: userId)),
               );
               break;
           }

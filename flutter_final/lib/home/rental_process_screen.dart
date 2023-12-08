@@ -1,28 +1,75 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../home/home_screen.dart';
 import '../rentals/rentals_screen.dart';
 import '../profile/profile_screen.dart';
+import 'package:flutter_final/database/vehicleRentals.dart';
+import 'package:flutter_final/database/clients.dart';
+import '../database/db.dart';
+import 'package:sqflite/sqflite.dart';
 
 class RentalProcessScreen extends StatefulWidget {
+  final int userId;
   final Vehicle selectedVehicle;
 
-  RentalProcessScreen({required this.selectedVehicle});
+  RentalProcessScreen({required this.userId, required this.selectedVehicle});
 
   @override
   _RentalProcessScreenState createState() => _RentalProcessScreenState();
 }
 
 class _RentalProcessScreenState extends State<RentalProcessScreen> {
-  late DateTime selectedDate;
-  late int selectedDays;
+  late DateTime startDate;
+  late DateTime endDate;
+  int selectedDays = 1;
   final double ratePerDay = 400.0;
   String selectedPaymentMethod = 'Efectivo';
+
+  _RentalProcessScreenState() {
+    // Inicializa startDate en el constructor
+    startDate = DateTime.now();
+    endDate = startDate.add(Duration(days: selectedDays));
+  }
+  Future<void> saveRental() async {
+    // Obtener el cliente actual
+    Client client;
+    try {
+      client = await DB.getClientById(widget.userId);
+    } catch (e) {
+      print('Error al obtener el cliente: $e');
+      return;
+    }
+
+    // Obtener el vehículo seleccionado
+    Vehicle selectedVehicle = widget.selectedVehicle;
+
+    // Calcular el total de la renta
+    double total = calculateTotal(startDate, endDate, ratePerDay);
+
+    // Crear una nueva instancia de VehicleRental
+    VehicleRental rental = VehicleRental(
+      idClient: widget.userId,
+      idVehicle: 1,
+      total: total.toInt(),
+      initialDay: startDate,
+      deliveryDay: endDate,
+      paymentMethod: selectedPaymentMethod,
+    );
+
+    // Guardar la renta en la base de datos
+    try {
+      await DB.insertVehicleRental(rental);
+      print('Renta guardada con éxito');
+    } catch (e) {
+      print('Error al guardar la renta: $e');
+    }
+  }
 
   @override
   void initState() {
     super.initState();
-    selectedDate = DateTime.now();
-    selectedDays = 1;
+    startDate = DateTime.now();
+    endDate = startDate.add(Duration(days: selectedDays));
   }
 
   @override
@@ -63,39 +110,42 @@ class _RentalProcessScreenState extends State<RentalProcessScreen> {
                   ),
                   SizedBox(height: 20.0),
                   Text(
-                    'Fecha de Préstamo: ${selectedDate.toLocal()}'
-                        .split(' ')[0],
+                    'Fecha de Préstamo: ${DateFormat('yyyy-MM-dd').format(startDate)}',
                     style: TextStyle(fontSize: 16.0),
                   ),
+                  SizedBox(height: 20.0),
                   ElevatedButton(
                     onPressed: () async {
                       final DateTime? picked = await showDatePicker(
                         context: context,
-                        initialDate: selectedDate,
+                        initialDate: startDate,
                         firstDate: DateTime.now(),
                         lastDate: DateTime(2101),
                       );
-                      if (picked != null && picked != selectedDate)
+                      if (picked != null && picked != startDate) {
                         setState(() {
-                          selectedDate = picked;
+                          selectedDays = 1;
+                          endDate = picked.add(Duration(days: selectedDays));
+                          selectedDays = calculateDays(startDate, endDate);
                         });
+                      }
                     },
-                    child: Text('Seleccionar Fecha de Préstamo'),
+                    child: Text('Seleccionar Fecha de Entrega'),
+                  ),
+                  Builder(
+                    builder: (BuildContext context) {
+                      DateTime displayEndDate =
+                          endDate.subtract(Duration(days: 1));
+                      return Text(
+                        'Fecha de Entrega: ${DateFormat('yyyy-MM-dd').format(displayEndDate)}',
+                        style: TextStyle(fontSize: 16.0),
+                      );
+                    },
                   ),
                   SizedBox(height: 20.0),
                   Text(
                     'Días: $selectedDays',
                     style: TextStyle(fontSize: 16.0),
-                  ),
-                  Slider(
-                    value: selectedDays.toDouble(),
-                    min: 1,
-                    max: 30,
-                    onChanged: (value) {
-                      setState(() {
-                        selectedDays = value.toInt();
-                      });
-                    },
                   ),
                   SizedBox(height: 20.0),
                   Text(
@@ -124,7 +174,7 @@ class _RentalProcessScreenState extends State<RentalProcessScreen> {
                   ),
                   SizedBox(height: 20.0),
                   Text(
-                    'Total: \$${(selectedDays * ratePerDay).toStringAsFixed(2)}',
+                    'Total: \$${calculateTotal(startDate, endDate, ratePerDay).toStringAsFixed(2)}',
                     style:
                         TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
                   ),
@@ -138,7 +188,8 @@ class _RentalProcessScreenState extends State<RentalProcessScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => HomeScreen()),
+                                builder: (context) =>
+                                    HomeScreen(userId: widget.userId)),
                           );
                         },
                         child: Text('Cancelar'),
@@ -151,7 +202,8 @@ class _RentalProcessScreenState extends State<RentalProcessScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => RentalsScreen()),
+                                builder: (context) =>
+                                    RentalsScreen(userId: widget.userId)),
                           );
                         },
                         child: Text('Guardar'),
@@ -179,7 +231,6 @@ class _RentalProcessScreenState extends State<RentalProcessScreen> {
             label: 'Perfil',
           ),
         ],
-        // Aquí puedes manejar la navegación entre las secciones
         onTap: (index) {
           switch (index) {
             case 0:
@@ -190,7 +241,8 @@ class _RentalProcessScreenState extends State<RentalProcessScreen> {
               Navigator.popUntil(context, ModalRoute.withName('/'));
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => RentalsScreen()),
+                MaterialPageRoute(
+                    builder: (context) => RentalsScreen(userId: widget.userId)),
               );
               break;
             case 2:
@@ -198,12 +250,28 @@ class _RentalProcessScreenState extends State<RentalProcessScreen> {
               Navigator.popUntil(context, ModalRoute.withName('/'));
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ProfileScreen()),
+                MaterialPageRoute(
+                    builder: (context) => ProfileScreen(userId: widget.userId)),
               );
               break;
           }
         },
       ),
     );
+  }
+
+  int calculateDays(DateTime startDate, DateTime endDate) {
+    // Asegurarse de que la fecha de inicio sea anterior a la fecha de fin
+    if (endDate.isBefore(startDate)) {
+      return 0;
+    }
+
+    return endDate.difference(startDate).inDays;
+  }
+
+  double calculateTotal(
+      DateTime startDate, DateTime endDate, double ratePerDay) {
+    int days = calculateDays(startDate, endDate);
+    return days * ratePerDay;
   }
 }
